@@ -1,6 +1,6 @@
 {
     "name": "conquer/jvectrormap",
-    "description": "Conquer jvectormap widget",
+    "description": "Yii2 jvectormap widget",
     "keywords": ["yii2", "extension", "widget", "jvectrormap"],
     "homepage": "https://github.com/borodulin/yii2-jvectormap",
     "type": "yii2-extension",
