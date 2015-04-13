@@ -30,7 +30,7 @@ class JVectorMapAsset extends \yii\web\AssetBundle
 		foreach (self::$_maps as $map){
 			$this->js[]="maps/jquery-jvectormap-$map.js";
 		}
-		parent::init();
+		parent::registerAssetFiles($view);
 	}
 	
 	public static function registerMap($map)
