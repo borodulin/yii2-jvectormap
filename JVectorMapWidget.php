@@ -58,6 +58,6 @@ class JVectorMapWidget extends \yii\base\Widget
 			$options['map']=$this->map;
 		$options=Json::encode($this->options);
 		$view->registerJs("jQuery('#{$htmlOptions['id']}').vectorMap($options);");
-		return Html::tag('div','',$options);
+		return Html::tag('div','',$htmlOptions);
 	}
 }
