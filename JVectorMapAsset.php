@@ -24,9 +24,14 @@ class JVectorMapAsset extends \yii\web\AssetBundle
 			'jquery-jvectormap-2.0.2.min.js',
 	];
 
-	public function registerAssetFiles($view)
+	public function init()
 	{
 		$this->sourcePath=dirname(__FILE__).\DIRECTORY_SEPARATOR.'assets';
+		parent::init();
+	}
+	
+	public function registerAssetFiles($view)
+	{
 		foreach (self::$_maps as $map){
 			$this->js[]="maps/jquery-jvectormap-$map.js";
 		}
