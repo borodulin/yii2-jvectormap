@@ -38,6 +38,8 @@ class JVectorMapAsset extends \yii\web\AssetBundle
             $jsname = "maps/jquery-jvectormap-$map.js";
             if (file_exists($this->sourcePath . "/" . $jsname)) {
                 $this->js[] = $jsname;
+            } else {
+                $this->js[] = $map;
             }
         }
         parent::registerAssetFiles($view);
