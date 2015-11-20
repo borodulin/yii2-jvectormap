@@ -7,6 +7,8 @@
 
 namespace conquer\jvectormap;
 
+use yii\base\InvalidConfigException;
+
 /**
  * @link http://jvectormap.com/
  */
@@ -35,11 +37,11 @@ class JVectorMapAsset extends \yii\web\AssetBundle
     public function registerAssetFiles($view)
     {
         foreach (self::$_maps as $map){
-            $jsname = "maps/jquery-jvectormap-$map.js";
+            $jsname = "maps/jquery-jvectormap-" . str_replace('_', '-', $map) . ".js";
             if (file_exists($this->sourcePath . "/" . $jsname)) {
                 $this->js[] = $jsname;
             } else {
-                $this->js[] = $map;
+                throw InvalidConfigException("Map {$map} is not found.");
             }
         }
         parent::registerAssetFiles($view);
