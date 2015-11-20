@@ -47,10 +47,8 @@ class JVectorMapWidget extends \yii\base\Widget
      */
     public function init()
     {
-        parent::init();
-        JVectorMapAsset::register($this->view);
-        if ($this->map) {
-            JVectorMapAsset::registerMap($this->map);
+        if (empty($htmlOptions['id'])) {
+            $htmlOptions['id'] = $this->getId();
         }
         echo Html::beginTag($this->tag, $this->htmlOptions);
     }
@@ -61,17 +59,18 @@ class JVectorMapWidget extends \yii\base\Widget
     public function run()
     {
         echo Html::endTag($this->tag);
-        
+
         $view = $this->getView();
-        $htmlOptions = $this->htmlOptions;
-        if (empty($htmlOptions['id'])) {
-            $htmlOptions['id'] = $this->getId();
+        
+        JVectorMapAsset::register($view);
+        if ($this->map) {
+            JVectorMapAsset::registerMap($this->map);
         }
         $options = $this->options;
         if ($this->map) {
             $options['map'] = str_replace('-', '_', $this->map);
         }
         $options = Json::encode($options);
-        $view->registerJs("jQuery('#{$htmlOptions['id']}').vectorMap($options);");
+        $view->registerJs("jQuery('#{$this->htmlOptions['id']}').vectorMap($options);");
     }
 }
