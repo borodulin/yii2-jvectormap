@@ -39,7 +39,7 @@ class JVectorMapWidget extends \yii\base\Widget
      * Html attributes of placeholder
      * @var array
      */
-    public $htmlOptions = [];
+    public $htmlOptions;
     
     /**
      * Initializes the widget.
@@ -47,8 +47,8 @@ class JVectorMapWidget extends \yii\base\Widget
      */
     public function init()
     {
-        if (empty($htmlOptions['id'])) {
-            $htmlOptions['id'] = $this->getId();
+        if (empty($this->htmlOptions['id'])) {
+            $this->htmlOptions['id'] = $this->getId();
         }
         echo Html::beginTag($this->tag, $this->htmlOptions);
     }
