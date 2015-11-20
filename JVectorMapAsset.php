@@ -15,11 +15,11 @@ class JVectorMapAsset extends \yii\web\AssetBundle
     private static $_maps=[];
     
     public $css = [
-            'jquery-jvectormap-2.0.2.css',
+            'jquery-jvectormap-2.0.3.css',
     ];
     
     public $js = [
-            'jquery-jvectormap-2.0.2.min.js',
+            'jquery-jvectormap-2.0.3.min.js',
     ];
 
     public $depends = [
