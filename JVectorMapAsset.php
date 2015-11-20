@@ -41,7 +41,7 @@ class JVectorMapAsset extends \yii\web\AssetBundle
             if (file_exists($this->sourcePath . "/" . $jsname)) {
                 $this->js[] = $jsname;
             } else {
-                throw InvalidConfigException("Map {$map} is not found.");
+                throw new InvalidConfigException("Map {$map} is not found.");
             }
         }
         parent::registerAssetFiles($view);
