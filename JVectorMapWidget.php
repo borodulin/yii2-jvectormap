@@ -39,7 +39,7 @@ class JVectorMapWidget extends \yii\base\Widget
      * Html attributes of placeholder
      * @var array
      */
-    public $htmlOptions;
+    public $htmlOptions = [];
     
     /**
      * Initializes the widget.
