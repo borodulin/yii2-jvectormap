@@ -26,6 +26,7 @@ class JVectorMapAsset extends \yii\web\AssetBundle
 
     public $depends = [
             'yii\web\JqueryAsset',
+            'conquer\excanvas\ExcanvasAsset',
     ];
     
     public function init()
