@@ -61,13 +61,10 @@ class JVectorMapWidget extends \yii\base\Widget
         echo Html::endTag($this->tag);
 
         $view = $this->getView();
-        
         JVectorMapAsset::register($view);
-        if ($this->map) {
-            JVectorMapAsset::registerMap($this->map);
-        }
         $options = $this->options;
         if ($this->map) {
+            JVectorMapAsset::registerMap($this->map);
             $options['map'] = str_replace('-', '_', $this->map);
         }
         $options = Json::encode($options);
