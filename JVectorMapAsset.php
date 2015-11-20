@@ -28,14 +28,17 @@ class JVectorMapAsset extends \yii\web\AssetBundle
     
     public function init()
     {
-        $this->sourcePath = dirname(__FILE__) . '\assets';
+        $this->sourcePath = dirname(__FILE__) . '/assets';
         parent::init();
     }
     
     public function registerAssetFiles($view)
     {
         foreach (self::$_maps as $map){
-            $this->js[] = "maps/jquery-jvectormap-$map.js";
+            $jsname = "maps/jquery-jvectormap-$map.js";
+            if (file_exists($this->sourcePath . "/" . $jsname)) {
+                $this->js[] = $jsname;
+            }
         }
         parent::registerAssetFiles($view);
     }
