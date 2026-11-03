@@ -1,26 +1,25 @@
-jVectorMap widget for Yii2 framework
-=================
+# jVectorMap widget for Yii2 framework
+
+[![Latest Version](https://img.shields.io/packagist/v/conquer/jvectormap.svg)](https://packagist.org/packages/conquer/jvectormap)
+[![Total Downloads](https://img.shields.io/packagist/dt/conquer/jvectormap.svg)](https://packagist.org/packages/conquer/jvectormap)
+[![License](https://img.shields.io/packagist/l/conquer/jvectormap.svg)](LICENSE)
 
 ## Description
 
 For more information please visit [jVectorMap Home Page](http://jvectormap.com/) 
 
+## Requirements
+
+- PHP 7.4 or 8.x
+- Yii 2.0
+
 ## Installation
 
-The preferred way to install this extension is through [composer](http://getcomposer.org/download/). 
+Install the extension via [Composer](https://getcomposer.org):
 
-To install, either run
-
+```bash
+composer require conquer/jvectormap:^1.1
 ```
-$ php composer.phar require conquer/jvectormap "*"
-```
-or add
-
-```
-"conquer/jvectormap": "*"
-```
-
-to the ```require``` section of your `composer.json` file.
 
 ## Usage
 
@@ -35,4 +34,4 @@ use conquer\jvectormap\JVectorMapWidget;
 
 ## License
 
-**conquer/jvectormap** is released under the MIT License. See the bundled `LICENSE.md` for details.
+**conquer/jvectormap** is released under the MIT License. See the bundled [`LICENSE`](LICENSE) for details.
