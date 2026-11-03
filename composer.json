@@ -1,7 +1,12 @@
 {
     "name": "conquer/jvectormap",
     "description": "Yii2 jvectormap widget",
-    "keywords": ["yii2", "extension", "widget", "jvectormap"],
+    "keywords": [
+        "yii2",
+        "extension",
+        "widget",
+        "jvectormap"
+    ],
     "homepage": "https://github.com/borodulin/yii2-jvectormap",
     "type": "yii2-extension",
     "license": "MIT",
@@ -17,17 +22,17 @@
     ],
     "extra": {
         "branch-alias": {
-          "dev-master": "1.0.1.x-dev"
+            "dev-master": "1.0.1.x-dev"
         }
-      },
-    "require": {
-    	"php": ">=5.4.0",
-    	"yiisoft/yii2": "*",
-    	"conquer/excanvas": "~1.0.0"
     },
-	"autoload": {
-		"psr-4": {
-			"conquer\\jvectormap\\": ""
-		}
-	}
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "yiisoft/yii2": "^2.0",
+        "conquer/excanvas": "~1.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "conquer\\jvectormap\\": ""
+        }
+    }
 }
