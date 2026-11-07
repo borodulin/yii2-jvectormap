@@ -7,67 +7,104 @@
 
 namespace conquer\jvectormap;
 
+use yii\base\Widget;
 use yii\helpers\Html;
 use yii\helpers\Json;
 
 /**
- * @link http://jvectormap.com/
+ * jVectorMap widget
+ *
+ * ```php
+ * <?= JVectorMapWidget::widget([
+ *     'map' => 'world_mill_en',
+ *     'htmlOptions' => ['style' => 'height: 500px'],
+ *     'options' => ['backgroundColor' => '#fff'],
+ * ]) ?>
+ * ```
+ *
+ * @link https://jvectormap.com/documentation/javascript-api/jvm-map/
+ * @author Andrey Borodulin
  */
-class JVectorMapWidget extends \yii\base\Widget
+class JVectorMapWidget extends Widget
 {
-
     /**
-     * Map name
+     * Map name, e.g. `world_mill_en` (see JVectorMapAsset::availableMaps())
      * @var string
      */
     public $map;
-    
+
     /**
-     * General Map options
-     * @link http://jvectormap.com/documentation/javascript-api/jvm-map/
+     * jVectorMap options; use yii\web\JsExpression for callbacks such as `onRegionTipShow`
+     * @link https://jvectormap.com/documentation/javascript-api/jvm-map/
      * @var array
      */
-    public $options;
+    public $options = [];
 
     /**
      * Placeholder tag
      * @var string
      */
     public $tag = 'div';
-    
+
     /**
-     * Html attributes of placeholder
+     * HTML attributes of the placeholder
      * @var array
      */
-    public $htmlOptions;
-    
+    public $htmlOptions = [];
+
     /**
-     * Initializes the widget.
-     * If you override this method, make sure you call the parent implementation first.
+     * Height of the placeholder unless set by its style or CSS classes (the map fills the placeholder,
+     * so it is not visible with zero height). Null disables it.
+     * @var string|null
+     */
+    public $defaultHeight = '400px';
+
+    /**
+     * @var string jVectorMap map name
+     */
+    private $_mapName;
+
+    /**
+     * @inheritdoc
      */
     public function init()
     {
+        parent::init();
         if (empty($this->htmlOptions['id'])) {
             $this->htmlOptions['id'] = $this->getId();
         }
+        if ($this->map) {
+            // reports an unknown map right here, not when the page is rendered
+            $this->_mapName = JVectorMapAsset::registerMap($this->map);
+        }
         echo Html::beginTag($this->tag, $this->htmlOptions);
     }
-    
+
     /**
      * @inheritdoc
      */
     public function run()
     {
-        echo Html::endTag($this->tag);
-
         $view = $this->getView();
         JVectorMapAsset::register($view);
-        $options = $this->options;
-        if ($this->map) {
-            JVectorMapAsset::registerMap($this->map);
-            $options['map'] = str_replace('-', '_', $this->map);
+
+        $id = (string)$this->htmlOptions['id'];
+        if ($this->defaultHeight !== null) {
+            // :where() has no specificity, so any height from CSS classes or the style attribute wins
+            $cssId = preg_replace_callback('/[^A-Za-z0-9_-]/u', function ($m) {
+                return '\\' . dechex(mb_ord($m[0], 'UTF-8')) . ' ';
+            }, $id);
+            $view->registerCss(':where([id="' . $cssId . '"]){height:'
+                . preg_replace('/[^\w.%() -]/', '', $this->defaultHeight) . '}');
         }
-        $options = Json::encode($options);
-        $view->registerJs("jQuery('#{$this->htmlOptions['id']}').vectorMap($options);");
+
+        $options = (array)$this->options;
+        if ($this->_mapName !== null) {
+            $options['map'] = $this->_mapName;
+        }
+        $view->registerJs('jQuery(document.getElementById(' . Json::htmlEncode($id) . ')).vectorMap('
+            . (empty($options) ? '{}' : Json::htmlEncode($options)) . ');');
+
+        return Html::endTag($this->tag);
     }
 }

@@ -1,6 +1,6 @@
 {
     "name": "conquer/jvectormap",
-    "description": "Yii2 jvectormap widget",
+    "description": "jVectorMap widget for Yii2 with the bundled world, continent and country maps",
     "keywords": [
         "yii2",
         "extension",
@@ -22,17 +22,36 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1.x-dev"
+            "dev-master": "1.2.x-dev"
         }
     },
     "require": {
         "php": "^7.4 || ^8.0",
         "yiisoft/yii2": "^2.0",
-        "conquer/excanvas": "~1.0.0"
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6"
     },
     "autoload": {
         "psr-4": {
             "conquer\\jvectormap\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "conquer\\jvectormap\\tests\\": "tests/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
         }
     }
 }
